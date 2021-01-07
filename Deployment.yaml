@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: delivery-system-container
-        image: jobanarubi/delivery-system
+        image: jobanarubi/delivery-system:latest
         ports:
         - containerPort: 9080
 ---
@@ -33,4 +33,4 @@ spec:
     port: 9080
     targetPort: 9080
     nodePort: 31000
-
+  type: LoadBalancer

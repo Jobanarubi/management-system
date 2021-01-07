@@ -22,14 +22,15 @@ pipeline {
             steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
+                        dockerImage.push("${env.BUILD_NUMBER}")
+ 			dockerImage.push("latest")
                     }
                 } 
             }
         } 
-        stage('Cleaning up') { 
+        stage('Deploy to kubernates') { 
             steps { 
-                sh "docker rmi $registry:$BUILD_NUMBER"  
+                sh 'kubectl apply -f Deployment.yml'  
             }
         } 
     }
