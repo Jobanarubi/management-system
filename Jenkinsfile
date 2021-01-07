@@ -30,7 +30,7 @@ pipeline {
         } 
         stage('Deploy to kubernates') { 
             steps { 
-                sh 'kubectl apply -f Deployment.yml'  
+                bat "kubectl apply -f Deployment.yml"  
             }
         } 
     }

@@ -33,4 +33,3 @@ spec:
     port: 9080
     targetPort: 9080
     nodePort: 31000
-  type: LoadBalancer
