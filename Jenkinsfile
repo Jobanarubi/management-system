@@ -1,14 +1,14 @@
 pipeline { 
     environment { 
         registry = "jobanarubi/delivery-system" 
-        registryCredential = 'jobanarubi' 
+        registryCredential = 'docker-hub-credentials' 
         dockerImage = '' 
     }
     agent any 
     stages { 
         stage('Cloning our Git') { 
             steps { 
-                git '' 
+                git 'https://github.com/Jobanarubi/management-system.git' 
             }
         } 
         stage('Building our image') { 
