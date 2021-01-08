@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: delivery-system-container
-        image: jobanarubi/delivery-system:latest
+        image: jobanarubi/delivery-system
         ports:
         - containerPort: 9080
 ---
@@ -33,3 +33,4 @@ spec:
     port: 9080
     targetPort: 9080
     nodePort: 31000
+
