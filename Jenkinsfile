@@ -33,7 +33,7 @@ pipeline {
             withCredentials([
             string(credentialsId:'my_kubernates',variable: 'api_token')
             ]) {
-                bat "kubectl --token $api_token --server https://127.0.0.1:49153 --insecure-skip-tls-verify=true apply -f Deployment.yml"  
+                bat "kubectl --token $api_token --server https://127.0.0.1:49153 --insecure-skip-tls-verify=true apply -f Deployment.yaml"  
             }
           }
         } 
