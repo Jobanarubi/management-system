@@ -1,6 +1,5 @@
 package com.delivery.system.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -37,17 +36,6 @@ public class ParcelDeliveryControllerTest {
 	    @MockBean
 	    private ParcelDeliveryRepository repository;
 	    
-	    @Test
-	    public void testUpdateDetailsService() throws Exception {
-	        ParcelDetails parcel = new ParcelDetails();
-	        parcel.setConsignmentId(100);
-	        parcel.setSeqid(2);
-	        parcel.setStatus("Transit");
-	        Optional<ParcelDetails> obj=Optional.of(parcel);
-	        Mockito.when(repository.findById(parcel.getConsignmentId())).thenReturn(obj);
-	        assertEquals(100, parcel.getConsignmentId());
-	    }
-	 
 	    private static ObjectMapper mapper = new ObjectMapper();
 	 
 	    @Test
@@ -58,7 +46,7 @@ public class ParcelDeliveryControllerTest {
 	        parcel.setSeqid(2);
 	        parcels.add(parcel);
 	        Mockito.when(deliveryService.getAgentDetails(parcel.getSeqid())).thenReturn(parcels);
-	        mockMvc.perform(get("/api/parcels?agentId=2")).andExpect(status().isOk());
+	        mockMvc.perform(get("/api/parcels?userName=dtc")).andExpect(status().isOk());
 	    }
 	    
 	    @Test

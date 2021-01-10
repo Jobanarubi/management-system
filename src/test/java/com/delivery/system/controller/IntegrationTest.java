@@ -9,9 +9,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
-import com.delivery.system.ParcelDeliverySystemApplication;
 import com.delivery.system.entity.ParcelDetails;
-import com.delivery.system.entity.User;
 
 @SpringBootTest
 public class IntegrationTest 

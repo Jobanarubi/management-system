@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.delivery.system.entity.ParcelDetails;
+import com.delivery.system.entity.User;
 import com.delivery.system.exception.ResourceNotFoundException;
 import com.delivery.system.service.ParcelDeliveryService;
 
@@ -26,6 +28,7 @@ public class ParcelDeliveryController {
 	@Autowired
 	ParcelDeliveryService service;
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(value="/addParcelDetails")
 	public ResponseEntity<ParcelDetails> addDetails(@RequestBody ParcelDetails parcelDetails) throws ResourceNotFoundException{
 		ParcelDetails addDetails = service.addDetails(parcelDetails);
@@ -43,8 +46,9 @@ public class ParcelDeliveryController {
 	  }
 	  
 	  @GetMapping(value="/parcels")
-	  public ResponseEntity<List<ParcelDetails>> getAgentDetails(@RequestParam int agentId) throws ResourceNotFoundException{
-		  List<ParcelDetails> detail = service.getAgentDetails(agentId);
+	  public ResponseEntity<List<ParcelDetails>> getAgentDetails(@RequestParam String userName) throws ResourceNotFoundException{
+		  User user = service.getUser(userName);
+		  List<ParcelDetails> detail = service.getAgentDetails(user.getSeqid());
 		  if(detail == null) {
 			  throw new ResourceNotFoundException("Data not found");
 		  }
